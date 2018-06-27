@@ -1,10 +1,16 @@
+
+
 var express = require("express");
 var app = express();
 var userDAO = require("./userDAO.js");
+var userInfoDAO = require("./userInfoDAO.js");
+var bodyParser = require("body-parser");
+var mongoDB = require("mongodb")
+var datetime = new Date()
 
-app.get("/user/:userid", function(request, response){
-    var user =  // fetch the i from the request
-      userDAO.find(userid, function(err, result){
+app.get("/", function(request, response){
+    
+      userInfoDAO.find(userInfo, function(err, result){
         response.setHeader("content-type", "application/json");
           if(err){
             console.log("No Such User ");
@@ -18,9 +24,9 @@ app.get("/user/:userid", function(request, response){
     });
   });
 
-    app.post("/user", function(request, response){
+    app.post("/", function(request, response){
         var user =  bodyParser.parse(request);
-          userDAO.save(user, function(err, result){
+          userInfoDAO.post(user, function(err, result){
             response.setHeader("content-type", "application/json");
               if(err){
                 console.log("No Such User ");
@@ -36,6 +42,7 @@ app.get("/user/:userid", function(request, response){
 });
 
 
+const port = 7777
 app.listen(7777, function(){
-  conole.log("Listening on highway 77777")
+  console.log("Blasting the music on highway " + port, "at " + datetime)
 })

@@ -1,5 +1,7 @@
 module.exports = {
-  create : function(object , cb){
+  post : function(object , cb){
+    "Hello We are looking for life on earth!"
+    cb();
   } ,
   find : function(object, cb){
   },
