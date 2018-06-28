@@ -1,10 +1,8 @@
 
 module.exports = {
-    post : function(object , cb){
-      id: 1;
-      username: "greg"
-      "Hello We are looking for life on earth!"
-      cb();
+    create : function(object , cb){
+
+      cb(null, object);
     } ,
     find : function(object, cb){
       var user = {};
@@ -13,9 +11,17 @@ module.exports = {
       cb(null, user);
     },
     update : function(object , cb){
+      cb(null,object);
     },
     delete : function(object , cb){
+      var user = {};
+      user.message = "Good work!";
+      cb(null, user);
     },
     findall : function(cb){
+      var user = {};
+      user.username = "gregory";
+      user.password = "hellow";
+      cb(null, user);
     }
   }
