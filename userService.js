@@ -13,8 +13,15 @@ const basicAuth = require('express-basic-auth')
 var datetime = new Date()
 const port = 7777
 
+
+
+app.use(basicAuth({
+  users: {'admin': 'admin'}
+}))
+
 app.get("/", function(request, response){
-    var userInfo = request.params.id
+    var userInfo = request.params.userinfo
+    var username = request.params.username
       userInfoDAO.find(userInfo, function(err, result){
         response.setHeader("content-type", "application/json");
           if(err){

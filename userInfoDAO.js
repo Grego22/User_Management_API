@@ -6,8 +6,11 @@ module.exports = {
       "Hello We are looking for life on earth!"
       cb();
     } ,
-    get : function(object, cb){
-      var userInfo = "Hellowwwwwwww!"
+    find : function(object, cb){
+      var user = {};
+      user.username = "gregory"
+      user.password = "hellow"
+      cb(null, user);
     },
     update : function(object , cb){
     },
