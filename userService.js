@@ -2,14 +2,19 @@
 
 var express = require("express");
 var app = express();
-var userDAO = require("./userDAO.js");
-var userInfoDAO = require("./userInfoDAO.js");
 var bodyParser = require("body-parser");
 var mongoDB = require("mongodb")
+var userInfoDAO = require("./userInfoDAO.js");
+var jsonParser = bodyParser.json();
+
+const basicAuth = require('express-basic-auth')
+
+// for listening to the port
 var datetime = new Date()
+const port = 7777
 
 app.get("/", function(request, response){
-    
+    var userInfo = request.params.id
       userInfoDAO.find(userInfo, function(err, result){
         response.setHeader("content-type", "application/json");
           if(err){
@@ -42,7 +47,6 @@ app.get("/", function(request, response){
 });
 
 
-const port = 7777
 app.listen(7777, function(){
   console.log("Blasting the music on highway " + port, "at " + datetime)
 })

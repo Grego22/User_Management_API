@@ -6,6 +6,7 @@ module.exports = {
   find : function(object, cb){
   },
   update : function(object , cb){
+    console.log ("Updated went thru, congrats!")
   },
   delete : function(object , cb){
   },
