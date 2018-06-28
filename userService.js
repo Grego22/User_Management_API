@@ -15,14 +15,14 @@ const port = 7777
 
 
 
-app.use(basicAuth({
-  users: {'admin': 'admin'}
-}))
+// app.use(basicAuth({
+//   users: {'admin': 'admin'}
+// }))
 
-app.get("/", function(request, response){
-    var userInfo = request.params.userinfo
+app.get("/user/:userId/:username", function(request, response){
+    var userId = request.params.userId
     var username = request.params.username
-      userInfoDAO.find(userInfo, function(err, result){
+      userInfoDAO.find(userId, function(err, result){
         response.setHeader("content-type", "application/json");
           if(err){
             console.log("No Such User ");
@@ -36,7 +36,7 @@ app.get("/", function(request, response){
     });
   });
 
-    app.post("/", function(request, response){
+    app.post("/user", function(request, response){
         var user =  bodyParser.parse(request);
           userInfoDAO.post(user, function(err, result){
             response.setHeader("content-type", "application/json");
@@ -51,7 +51,26 @@ app.get("/", function(request, response){
               }
         });
   // fetch userid // call the dao ?
+  });
+
+  app.put("/user", jsonParser, function(request, response){
+    var user = request.body;
+    userDAO.create(user, function(err, result){
+          response.setHeader("content-type", "application/json");
+          if(err){
+            console.log("No Such User ");
+            var error = {};
+            error.errorCode = 1;
+            error.errorMessage = "Invalid User";
+            response.end(JSON.stringify(error));
+          }else{
+            response.end(JSON.stringify(result));
+          }
+    });
 });
+
+
+
 
 
 app.listen(7777, function(){
